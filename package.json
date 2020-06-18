@@ -15,7 +15,12 @@
   "author": "Davide Barasti",
   "license": "ISC",
   "dependencies": {
+    "@truffle/contract": "^4.2.9",
+    "chalk": "^4.1.0",
     "inquirer": "^7.2.0",
+    "normalize-date": "0.0.4",
+    "unix-timestamp": "^0.2.0",
+    "web3": "^1.2.9",
     "yargs": "^15.3.1"
   }
 }
