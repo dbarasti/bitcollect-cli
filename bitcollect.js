@@ -36,11 +36,6 @@ yargs.command({
       describe: 'address of the campaign to fund',
       demandOption: true,
       type: 'string'
-    },
-    amount: {
-      describe: 'amount in wei',
-      demandOption: true,
-      type: 'number'
     }
   },
   handler: (argv) => {
@@ -61,11 +56,6 @@ yargs.command({
       describe: 'address of the campaign to donate to',
       demandOption: true,
       type: 'string'
-    },
-    amount: {
-      describe: 'donation amount in wei',
-      demandOption: true,
-      type: 'number'
     }
   },
   handler: (argv) => {
