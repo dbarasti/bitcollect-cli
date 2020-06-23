@@ -85,7 +85,7 @@ yargs.command({
 
 yargs.command({
   command: 'deactivate',
-  describe: 'deactivate contract',
+  describe: 'deactivate campaign',
   builder: {
     from: {
       describe: 'account address issuing the command',
