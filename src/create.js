@@ -7,7 +7,6 @@ const provider = new Web3.providers.HttpProvider("http://127.0.0.1:7545");
 const contract = require("@truffle/contract");
 const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
 const models = require("./models/contracts");
-require("./models/db");
 const validateAddresses = require("./utils").validateAddresses;
 
 let CampaignContract = contract(campaignJSON);

@@ -3,7 +3,6 @@ const inquirer = require('inquirer');
 const provider = new Web3.providers.HttpProvider("http://localhost:7545");
 const contract = require("@truffle/contract");
 const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
-require("./models/db");
 const Utils = require("./utils");
 
 let CampaignContract = contract(campaignJSON);
