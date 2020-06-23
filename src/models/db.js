@@ -6,13 +6,15 @@ const dbURI = process.env.CONNECTION_URI;
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
+}).catch(err => {
+  log("Mongoose connection error: " + err);
 });
 
 mongoose.connection.on("connected", () => {
   log(`Mongoose connected to ${dbURI}`);
 });
 mongoose.connection.on("error", err => {
-  log("Mongoose connection error:", err);
+  log("Mongoose connection error: " + err);
 });
 mongoose.connection.on("disconnected", () => {
   log("Mongoose disconnected");
