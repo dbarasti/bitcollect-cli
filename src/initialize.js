@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 const inquirer = require('inquirer');
 const Web3 = require('web3');
-const provider = new Web3.providers.HttpProvider("http://localhost:8545");
+const provider = new Web3.providers.HttpProvider("http://localhost:7545");
 const contract = require("@truffle/contract");
 const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
 const CampaignModel = require("./models/contracts").CampaignModel;
@@ -34,9 +34,10 @@ async function initialize(argv) {
   let exists = await CampaignModel.exists({
     address: argv.campaign
   })
+  // no longer need db connection
+  mongoose.disconnect();
   if (!exists) {
     console.log("Error - campaign not registered at " + argv.campaign);
-    mongoose.disconnect();
     return;
   }
 
@@ -51,11 +52,10 @@ async function initialize(argv) {
       });
     } catch (e) {
       console.log("Error while initializing the campaign - " + e.reason);
-      mongoose.disconnect();
+
       return;
     }
     console.log("Campaign initialized by " + argv.from);
-    mongoose.disconnect();
     return;
   });
 
