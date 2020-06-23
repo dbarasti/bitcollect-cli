@@ -103,6 +103,28 @@ yargs.command({
   }
 })
 
+yargs.command({
+  command: 'set-milestones',
+  describe: 'set milestones for the campaign',
+  builder: {
+    from: {
+      describe: 'account address issuing the command',
+      demandOption: true,
+      type: 'string'
+    },
+    campaign: {
+      describe: 'address of the campaign to which to add milestones',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler: (argv) => {
+    require('./src/milestone')(argv);
+  }
+})
+
+
+
 
 yargs.example("$0 create -f 0x123 -o 0x751 0x751 -b 0x421 0x112 0x985 -d '17-12-2020 15:02:00'",
   "create a new campaign specifying organizers, beneficiaries and the deadline");
