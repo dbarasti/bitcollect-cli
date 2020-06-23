@@ -127,12 +127,50 @@ yargs.command('rewarder', 'manage milestone rewarder', function (yargs) {
   argv = yargs
     .usage('usage: $0 rewarder <action> [options]')
     .command('create', 'deploy a new rewarder', function (yargs) {
+      yargs.option('f', {
+        alias: 'from',
+        demandOption: true,
+        describe: 'account creating the rewarder contract'
+      });
       console.log('deploying rewarder :)')
     })
     .command('fund', 'send an amount to a rewarder', function (yargs) {
-      console.log('sending ether to rewarder :)')
-    })
+        yargs.option('f', {
+          alias: 'from',
+          demandOption: true,
+          describe: 'account sending ether to the rewarder contract'
+        });
+        yargs.option('r', {
+          alias: 'rewarder',
+          demandOption: true,
+          describe: 'address of the rewarder'
+        });
+        yargs.option('a', {
+          alias: 'amount',
+          demandOption: true,
+          describe: 'amount to send to the rewarder contract'
+        });
+      },
+      function (yargs) {
+        console.log('sending ether to rewarder :)')
+      })
     .command('add', 'register existing campaign to rewarder', function (yargs) {
+      yargs.option('f', {
+        alias: 'from',
+        demandOption: true,
+        describe: 'account sending ether to the rewarder contract'
+      });
+      yargs.option('r', {
+        alias: 'rewarder',
+        demandOption: true,
+        describe: 'address of the rewarder'
+      });
+      yargs.option('c', {
+        alias: 'campaign',
+        demandOption: true,
+        describe: 'campaign address that you want to register to the rewarder'
+      });
+    }, function (yargs) {
       console.log('registering campaign to rewarder :)')
     })
     .help('help')
