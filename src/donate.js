@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 const inquirer = require('inquirer');
 const Web3 = require('web3');
-const provider = new Web3.providers.HttpProvider("http://localhost:8545");
+const provider = new Web3.providers.HttpProvider("http://localhost:7545");
 const contract = require("@truffle/contract");
 const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
 const CampaignModel = require("./models/contracts").CampaignModel;
@@ -34,18 +34,24 @@ async function donate(argv) {
   let exists = await CampaignModel.exists({
     address: argv.campaign
   })
+  // no longer need the db connection
+  mongoose.disconnect();
   if (!exists) {
     console.log("Error - campaign not registered at " + argv.campaign);
-    mongoose.disconnect();
     return;
   }
-  mongoose.disconnect();
+
   // collect other info
   inquirer.prompt(questions).then(async (answers) => {
     // donate to the campaign
     let instance;
     try {
       instance = await CampaignContract.at(argv.campaign);
+    } catch {
+      console.log("Error while getting the contract from the network. Are you sure Ganache is running?");
+      return;
+    }
+    try {
       await instance.donate(answers.distribution.split(' '), {
         from: argv.from,
         value: answers.amount
@@ -59,7 +65,7 @@ async function donate(argv) {
       from: argv.from
     })
     console.log("New campaign balance: " + balance);
-    return; // why doe it ducking hangs??
+    return; // why does it ducking hangs??
   });
 
 
