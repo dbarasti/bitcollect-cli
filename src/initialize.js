@@ -1,11 +1,9 @@
-var mongoose = require("mongoose");
 const inquirer = require('inquirer');
 const Web3 = require('web3');
 const provider = new Web3.providers.HttpProvider("http://localhost:7545");
 const contract = require("@truffle/contract");
 const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
-const CampaignModel = require("./models/contracts").CampaignModel;
-require("./models/db");
+const checkCampaignRegistration = require("./utils").checkCampaignRegistration;
 
 let CampaignContract = contract(campaignJSON);
 CampaignContract.setProvider(provider);
@@ -30,14 +28,10 @@ let questions = [{
 ];
 
 async function initialize(argv) {
-  // check that the campaign exists
-  let exists = await CampaignModel.exists({
-    address: argv.campaign
-  })
-  // no longer need db connection
-  mongoose.disconnect();
-  if (!exists) {
-    console.log("Error - campaign not registered at " + argv.campaign);
+  try {
+    await checkCampaignRegistration(argv.campaign);
+  } catch (e) {
+    console.log(e);
     return;
   }
 

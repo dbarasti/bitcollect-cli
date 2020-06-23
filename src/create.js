@@ -8,6 +8,7 @@ const contract = require("@truffle/contract");
 const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
 const models = require("./models/contracts");
 require("./models/db");
+const validateAddresses = require("./utils").validateAddresses;
 
 let CampaignContract = contract(campaignJSON);
 CampaignContract.setProvider(provider);
@@ -16,13 +17,13 @@ let questions = [{
     type: 'input',
     name: 'organizers',
     message: 'Who are the organizers?',
-    validate: validateAddress
+    validate: validateAddresses
   },
   {
     type: 'input',
     name: 'beneficiaries',
     message: 'Who are the beneficiaries?',
-    validate: validateAddress
+    validate: validateAddresses
   },
   {
     type: 'input',
@@ -50,8 +51,9 @@ function create(name, from) {
       beneficiaries: answers.beneficiaries.split(' '),
       deadline: deadline
     }
+    let addr;
     try {
-      let addr = await newCampaign(constructor);
+      addr = await newCampaign(constructor);
     } catch (e) {
       e.reason == undefined && console.log("Error while creating the contract. Are you sure Ganache is running?")
       e.reason != undefined && console.log("Error while creating the campaign - " + e.reason);
@@ -80,19 +82,6 @@ async function newCampaign(constructor) {
     mongoose.disconnect();
   });
   return instance.address;
-}
-
-function validateAddress(value) {
-  let addresses = value.split(' ');
-  let pass = true;
-  for (let i = 0; i < addresses.length && pass != undefined; i++) {
-    pass = addresses[i].match(/^0x/);
-  }
-  if (pass) {
-    return true;
-  } else {
-    return 'Please enter valid Ethereum addresses, separated by spaces';
-  }
 }
 
 module.exports = create;
