@@ -123,12 +123,39 @@ yargs.command({
   }
 })
 
+yargs.command('rewarder', 'manage milestone rewarder', function (yargs) {
+  argv = yargs
+    .usage('usage: $0 rewarder <action> [options]')
+    .command('create', 'deploy a new rewarder', function (yargs) {
+      console.log('deploying rewarder :)')
+    })
+    .command('fund', 'send an amount to a rewarder', function (yargs) {
+      console.log('sending ether to rewarder :)')
+    })
+    .command('add', 'register existing campaign to rewarder', function (yargs) {
+      console.log('registering campaign to rewarder :)')
+    })
+    .help('help')
+    .updateStrings({
+      'Commands:': 'action:'
+    })
+    .wrap(null)
+    .argv
+  checkCommands(yargs, argv, 2)
+})
 
+function checkCommands(yargs, argv, numRequired) {
+  if (argv._.length < numRequired) {
+    yargs.showHelp()
+  } else {
+    // check for unknown command
+  }
+}
 
-
-yargs.example("$0 create -f 0x123 -o 0x751 0x751 -b 0x421 0x112 0x985 -d '17-12-2020 15:02:00'",
-  "create a new campaign specifying organizers, beneficiaries and the deadline");
+yargs.example("$0 create -f 0x123",
+  "create a new campaign specifying the creator");
 // todo create examples
+
 yargs.alias({
   'h': 'help',
   'f': 'from',
