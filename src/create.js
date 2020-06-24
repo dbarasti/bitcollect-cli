@@ -54,7 +54,7 @@ function create(name, from) {
     try {
       addr = await newCampaign(constructor);
     } catch (e) {
-      e.reason == undefined && console.log("Error while creating the contract. Are you sure Ganache is running?")
+      e.reason == undefined && console.log("Error while creating the campaign. Are you sure Ganache is running?")
       e.reason != undefined && console.log("Error while creating the campaign - " + e.reason);
       return;
     }
