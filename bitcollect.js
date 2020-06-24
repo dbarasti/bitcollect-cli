@@ -123,6 +123,43 @@ yargs.command({
   }
 })
 
+yargs.command('reward', 'manage donors\' rewards of a campaign', function (yargs) {
+  argv = yargs
+    .usage('usage: $0 reward <action> [options]')
+    .command('add', 'add a new series of rewards', function (yargs) {
+      yargs.option('from', {
+        demandOption: true,
+        describe: 'account setting the rewards'
+      });
+      yargs.option('campaign', {
+        demandOption: true,
+        describe: 'address of the campaign'
+      });
+    }, (yargs) => {
+      require('./src/commands/rewards').add(yargs);
+    })
+    .command('claim', 'claim your rewards, if any present', function (yargs) {
+        yargs.option('from', {
+          demandOption: true,
+          describe: 'account requesting the rewards'
+        });
+        yargs.option('campaign', {
+          demandOption: true,
+          describe: 'address of the campaign'
+        });
+      },
+      function (yargs) {
+        require('./src/commands/rewards').claim(yargs);
+      })
+    .help('help')
+    .updateStrings({
+      'Commands:': 'action:'
+    })
+    .wrap(null)
+    .argv
+  checkCommands(yargs, argv, 2)
+})
+
 yargs.command('rewarder', 'manage milestone rewarder', function (yargs) {
   argv = yargs
     .usage('usage: $0 rewarder <action> [options]')
