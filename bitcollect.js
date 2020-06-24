@@ -160,55 +160,50 @@ yargs.command('reward', 'manage donors\' rewards of a campaign', function (yargs
   checkCommands(yargs, argv, 2)
 })
 
+
 yargs.command('rewarder', 'manage milestone rewarder', function (yargs) {
   argv = yargs
     .usage('usage: $0 rewarder <action> [options]')
     .command('create', 'deploy a new rewarder', function (yargs) {
-      yargs.option('f', {
-        alias: 'from',
+      yargs.option('from', {
         demandOption: true,
         describe: 'account creating the rewarder contract'
       });
-      console.log('deploying rewarder :)')
+    }, (yargs) => {
+      require('./src/commands/rewarder').create(yargs);
     })
     .command('fund', 'send an amount to a rewarder', function (yargs) {
-        yargs.option('f', {
-          alias: 'from',
+        yargs.option('from', {
           demandOption: true,
           describe: 'account sending ether to the rewarder contract'
         });
-        yargs.option('r', {
-          alias: 'rewarder',
+        yargs.option('rewarder', {
           demandOption: true,
           describe: 'address of the rewarder'
         });
-        yargs.option('a', {
-          alias: 'amount',
+        yargs.option('amount', {
           demandOption: true,
           describe: 'amount to send to the rewarder contract'
         });
       },
       function (yargs) {
-        console.log('sending ether to rewarder :)')
+        require('./src/commands/rewarder').fund(yargs);
       })
     .command('add', 'register existing campaign to rewarder', function (yargs) {
       yargs.option('f', {
-        alias: 'from',
         demandOption: true,
         describe: 'account sending ether to the rewarder contract'
       });
       yargs.option('r', {
-        alias: 'rewarder',
         demandOption: true,
         describe: 'address of the rewarder'
       });
       yargs.option('c', {
-        alias: 'campaign',
         demandOption: true,
         describe: 'campaign address that you want to register to the rewarder'
       });
     }, function (yargs) {
-      console.log('registering campaign to rewarder :)')
+      require('./src/commands/rewarder').add(yargs);
     })
     .help('help')
     .updateStrings({
@@ -239,10 +234,12 @@ yargs.alias({
   'b': 'beneficiaries',
   'd': 'deadline',
   'a': 'amount',
+  'r': 'rewarder',
   'c': 'campaign'
 });
 yargs.array(['o', 'b']);
 yargs.demandCommand(1, 'You need at least one command before moving on');
 yargs.help('h');
 yargs.epilogue('for more information, find the GitHub page at https://github.com/dbarasti');
+// equivalent to calling yargs.argv
 yargs.parse();
