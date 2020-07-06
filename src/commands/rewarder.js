@@ -2,7 +2,7 @@ const Web3 = require('web3');
 require("dotenv/config");
 const provider = new Web3.providers.HttpProvider(process.env.GANACHE);
 const contract = require("@truffle/contract");
-const rewarderJSON = require('../../../final_project/build/contracts/CampaignRewarder.json')
+const rewarderJSON = require(process.env.REWARDER_CONTRACT);
 let RewarderContract = contract(rewarderJSON);
 RewarderContract.setProvider(provider);
 
