@@ -1,6 +1,7 @@
 const inquirer = require('inquirer');
 const Web3 = require('web3');
-const provider = new Web3.providers.HttpProvider("http://localhost:7545");
+require("dotenv/config");
+const provider = new Web3.providers.HttpProvider(process.env.GANACHE);
 const contract = require("@truffle/contract");
 const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
 const checkCampaignRegistration = require("./utils").checkCampaignRegistration;

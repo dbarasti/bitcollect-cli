@@ -3,7 +3,8 @@ const toDate = require('normalize-date');
 const timestamp = require('unix-timestamp');
 var mongoose = require("mongoose");
 const Web3 = require('web3');
-const provider = new Web3.providers.HttpProvider("http://127.0.0.1:7545");
+require("dotenv/config");
+const provider = new Web3.providers.HttpProvider(process.env.GANACHE);
 const contract = require("@truffle/contract");
 const campaignJSON = require('../../../final_project/build/contracts/Campaign.json')
 const models = require("../models/contracts");
