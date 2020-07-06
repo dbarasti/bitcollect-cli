@@ -3,8 +3,8 @@ const inquirer = require('inquirer');
 require("dotenv/config");
 const provider = new Web3.providers.HttpProvider(process.env.GANACHE);
 const contract = require("@truffle/contract");
-const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
-const Utils = require("./utils");
+const campaignJSON = require('../../../final_project/build/contracts/Campaign.json')
+const Utils = require("../utils");
 
 let CampaignContract = contract(campaignJSON);
 CampaignContract.setProvider(provider);
