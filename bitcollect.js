@@ -19,7 +19,7 @@ yargs.command({
     }
   },
   handler: (argv) => {
-    require('./src/create')(argv.n, argv.f);
+    require('./src/commands/create')(argv.n, argv.f);
   }
 });
 yargs.command({
@@ -39,7 +39,7 @@ yargs.command({
     }
   },
   handler: (argv) => {
-    require('./src/initialize')(argv);
+    require('./src/commands/initialize')(argv);
   }
 })
 
@@ -59,7 +59,7 @@ yargs.command({
     }
   },
   handler: (argv) => {
-    require('./src/donate')(argv);
+    require('./src/commands/donate')(argv);
   }
 });
 
@@ -79,7 +79,7 @@ yargs.command({
     }
   },
   handler: (argv) => {
-    require('./src/withdraw')(argv);
+    require('./src/commands/withdraw')(argv);
   }
 })
 
@@ -99,7 +99,7 @@ yargs.command({
     }
   },
   handler: (argv) => {
-    require('./src/deactivate')(argv);
+    require('./src/commands/deactivate')(argv);
   }
 })
 
@@ -119,7 +119,7 @@ yargs.command({
     }
   },
   handler: (argv) => {
-    require('./src/milestone')(argv);
+    require('./src/commands/milestone')(argv);
   }
 })
 
@@ -240,6 +240,6 @@ yargs.alias({
 yargs.array(['o', 'b']);
 yargs.demandCommand(1, 'You need at least one command before moving on');
 yargs.help('h');
-yargs.epilogue('for more information, find the GitHub page at https://github.com/dbarasti');
+yargs.epilogue('for more information, find the GitHub page at https://github.com/dbarasti/bitcollect-cli');
 // equivalent to calling yargs.argv
 yargs.parse();
