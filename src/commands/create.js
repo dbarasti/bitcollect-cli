@@ -5,9 +5,9 @@ var mongoose = require("mongoose");
 const Web3 = require('web3');
 const provider = new Web3.providers.HttpProvider("http://127.0.0.1:7545");
 const contract = require("@truffle/contract");
-const campaignJSON = require('../../final_project/build/contracts/Campaign.json')
-const models = require("./models/contracts");
-const validateAddresses = require("./utils").validateAddresses;
+const campaignJSON = require('../../../final_project/build/contracts/Campaign.json')
+const models = require("../models/contracts");
+const validateAddresses = require("../utils").validateAddresses;
 
 let CampaignContract = contract(campaignJSON);
 CampaignContract.setProvider(provider);
