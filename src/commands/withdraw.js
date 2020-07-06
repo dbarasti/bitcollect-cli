@@ -28,8 +28,8 @@ async function withdraw(argv) {
       from: argv.from
     });
   } catch (e) {
-    e.reason == undefined && console.log("Error while creating the campaign - " + e)
-    e.reason != undefined && console.log("Error while creating the campaign - " + e.reason);
+    e.reason == undefined && console.log("Error while withdrawing from  the campaign - " + e)
+    e.reason != undefined && console.log("Error while withdrawing from the campaign - " + e.reason);
     return;
   }
   console.log("Successful withdraw by " + argv.from);

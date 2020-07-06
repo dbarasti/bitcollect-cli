@@ -40,7 +40,7 @@ async function fund(argv) {
     e.reason != undefined && console.log("Error while funding the rewarder - " + e.reason);
     return;
   }
-  console.log("Successfully fund the rewarder at " + argv.rewarder);
+  console.log("Successfully funded the rewarder at " + argv.rewarder);
 }
 
 async function add(argv) {
