@@ -214,6 +214,34 @@ yargs.command('rewarder', 'manage milestone rewarder', function (yargs) {
   checkCommands(yargs, argv, 2)
 })
 
+yargs.command({
+  command: 'campaigns',
+  describe: 'retrieve the addresses of the registered campaigns',
+  handler: (argv) => {
+    require('./src/commands/campaigns')();
+  }
+})
+
+yargs.command({
+  command: 'info',
+  describe: 'get information about a campaign',
+  builder: {
+    from: {
+      describe: 'account address issuing the command',
+      demandOption: true,
+      type: 'string'
+    },
+    campaign: {
+      describe: 'address of the campaign you want to know of',
+      demandOption: true,
+      type: 'string'
+    }
+  },
+  handler: (argv) => {
+    require('./src/commands/info')(argv);
+  }
+})
+
 function checkCommands(yargs, argv, numRequired) {
   if (argv._.length < numRequired) {
     yargs.showHelp()
