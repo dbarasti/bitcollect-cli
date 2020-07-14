@@ -1,6 +1,4 @@
 const inquirer = require('inquirer');
-const toDate = require('normalize-date');
-const timestamp = require('unix-timestamp');
 var mongoose = require("mongoose");
 const Web3 = require('web3');
 require("dotenv/config");
@@ -28,13 +26,12 @@ let questions = [{
   {
     type: 'input',
     name: 'deadline',
-    message: 'When is the deadline scheduled? format yyyy/mm/dd or yyyy-mm-dd',
+    message: 'When is the deadline scheduled?',
     validate: function (value) {
-      var dateformat = /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/;
-      if (value.match(dateformat)) {
+      if (Date.parse(value)) {
         return true;
       } else {
-        return 'date should match the format yyyy/mm/dd or yyyy-mm-dd'
+        return 'timeline should be a valid one'
       }
     }
   }
@@ -43,7 +40,8 @@ let questions = [{
 
 function create(name, from) {
   inquirer.prompt(questions).then(async (answers) => {
-    let deadline = timestamp.fromDate(toDate(answers.deadline));
+    let deadlineMillis = Date.parse(answers.deadline);
+    let deadline = deadlineMillis / 1000;
     let constructor = {
       from: from,
       name: name,
