@@ -51,7 +51,7 @@ async function donate(argv) {
       await instance.donate(answers.distribution.split(' '), {
         from: argv.from,
         value: answers.amount,
-        gasLimit: "20000000"
+        gasLimit: "1000000"
       });
     } catch (e) {
       e.reason == undefined && console.log("Error while donating to the campaign - " + e)
