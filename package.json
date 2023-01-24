@@ -15,7 +15,7 @@
   "author": "Davide Barasti",
   "license": "ISC",
   "dependencies": {
-    "@truffle/contract": "^4.2.9",
+    "@truffle/contract": "^4.6.12",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "inquirer": "^7.2.0",
