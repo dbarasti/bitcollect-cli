@@ -15,13 +15,13 @@
   "author": "Davide Barasti",
   "license": "ISC",
   "dependencies": {
-    "@truffle/contract": "^4.2.9",
+    "@truffle/contract": "^4.6.12",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "inquirer": "^7.2.0",
     "log-to-file": "^2.0.2",
     "mongoose": "^5.9.19",
-    "web3": "^1.2.9",
+    "web3": "^1.8.1",
     "yargs": "^15.3.1"
   }
 }
